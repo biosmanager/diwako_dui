@@ -8,7 +8,7 @@ private _colorNames = [];
 private _colorIdent = [];
 
 private _getColorFromHex = {
-    params ["_key", "_hex"];
+    params ["_key", "_hex", "_namespace"];
     _hex = toArray _hex;
     _hex deleteAt 0; //remove the '#' at the beginning
     private _nums = toArray "0123456789ABCDEF"; //for converting hex nibbles to base 10 equivalents
@@ -27,15 +27,15 @@ private _getColorFromHex = {
     _colorNames pushback getText (_x >> "name");
 
     _namespace setVariable ["main", getText (_x >> "white")];
-    ["main", _namespace getVariable "main"] call _getColorFromHex;
+    ["main", _namespace getVariable "main", _namespace] call _getColorFromHex;
     _namespace setVariable ["red", getText (_x >> "red")];
-    ["red", _namespace getVariable "red"] call _getColorFromHex;
+    ["red", _namespace getVariable "red", _namespace] call _getColorFromHex;
     _namespace setVariable ["green", getText (_x >> "green")];
-    ["green", _namespace getVariable "green"] call _getColorFromHex;
+    ["green", _namespace getVariable "green", _namespace] call _getColorFromHex;
     _namespace setVariable ["blue", getText (_x >> "blue")];
-    ["blue", _namespace getVariable "blue"] call _getColorFromHex;
+    ["blue", _namespace getVariable "blue", _namespace] call _getColorFromHex;
     _namespace setVariable ["yellow", getText (_x >> "yellow")];
-    ["yellow", _namespace getVariable "yellow"] call _getColorFromHex;
+    ["yellow", _namespace getVariable "yellow", _namespace] call _getColorFromHex;
 
     missionNamespace setVariable [format[QGVAR(colors_%1), _configName], _namespace]
 } forEach (_configs + _missionConfigs);
