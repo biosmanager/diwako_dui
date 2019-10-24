@@ -37,8 +37,8 @@ if (GVAR(group_by_vehicle)) then {
 private _uiScale = diwako_dui_hudScaling;
 private _uiPixels = GVAR(uiPixels);
 
-private _colorNameSpace = missionNamespace getVariable format[QEGVAR(main,colors) + "_%1", diwako_dui_colors];
-private _iconNamespace = missionNamespace getVariable format[QEGVAR(main,icon) + "_%1", diwako_dui_icon_style];
+private _colorNameSpace = missionNamespace getVariable format[QEGVAR(main,colors_%1), diwako_dui_colors];
+private _iconNamespace = missionNamespace getVariable format[QEGVAR(main,icon_%1), diwako_dui_icon_style];
 
 {
     if (alive _x) then {
